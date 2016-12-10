@@ -24,6 +24,7 @@
     "chico": "^2.0.9",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-include": "^2.3.1",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
