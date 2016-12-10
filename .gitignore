@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/sass,macos
 
+### Project related ###
+app/js/dist
+app/css
 
 ### NODE ###
 node_modules
@@ -7,7 +10,6 @@ node_modules
 ### Sass ###
 .sass-cache/
 *.css.map
-
 
 ### macOS ###
 *.DS_Store
