@@ -1,14 +1,15 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
-var useref = require('gulp-useref');
-var uglify = require('gulp-uglify');
-var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
-var del = require('del');
-var runSequence = require('run-sequence');
-var include       = require("gulp-include");
+var gulp = require('gulp'),
+  sass = require('gulp-sass'),
+  browserSync = require('browser-sync').create(),
+  useref = require('gulp-useref'),
+  uglify = require('gulp-uglify'),
+  gulpIf = require('gulp-if'),
+  cssnano = require('gulp-cssnano'),
+  del = require('del'),
+  runSequence = require('run-sequence'),
+  include = require("gulp-include");
 
+// Compile SASS
 gulp.task('sass', function() {
   return gulp.src('app/scss/**/*.scss')
     .pipe(sass())
@@ -18,6 +19,7 @@ gulp.task('sass', function() {
     }))
 });
 
+// Activate browserSync
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
@@ -26,6 +28,7 @@ gulp.task('browserSync', function() {
   })
 });
 
+// Compile JS
 gulp.task("js", function() {
   return gulp.src("app/js/dev/main.js")
   .pipe(include({
@@ -41,6 +44,7 @@ gulp.task("js", function() {
     }));
 });
 
+// Minify JS and CSS
 gulp.task('useref', function(){
   return gulp.src('app/*.html')
     .pipe(useref())
@@ -49,25 +53,45 @@ gulp.task('useref', function(){
     .pipe(gulp.dest('dist'))
 });
 
+// Clean DIST folder
 gulp.task('clean:dist', function() {
   return del.sync('dist');
 });
 
+// Watch for changes
 gulp.task('watch', ['browserSync', 'sass'], function (){
   gulp.watch('app/scss/**/*.scss', ['sass']); 
   gulp.watch('app/*.html', browserSync.reload); 
   gulp.watch('app/js/dev/*.js', ['js']); 
 });
 
+// Copy Chico related assets for DEV
+gulp.task('copy', function () {
+    // Everything in the assets folder
+    return gulp
+        .src([__dirname + '/node_modules/chico/src/shared/assets/**/*.*'], {
+            base: __dirname + '/node_modules/chico/src/shared/'
+        })
+        .pipe(gulp.dest('app'));
+});
+
+// Copy assets for DIST
+gulp.task('assets', function() {
+  return gulp.src('app/assets/**/*')
+  .pipe(gulp.dest('dist/assets'))
+})
+
+// Build for production
 gulp.task('build', function (callback) {
   runSequence('clean:dist', 
-    ['sass', 'js', 'useref'],
+    ['sass', 'js', 'useref', 'assets'],
     callback
   )
 });
 
+// Default DEV task
 gulp.task('default', function (callback) {
-  runSequence(['sass', 'js', 'browserSync', 'watch'],
+  runSequence(['copy', 'sass', 'js', 'browserSync', 'watch'],
     callback
   )
 });

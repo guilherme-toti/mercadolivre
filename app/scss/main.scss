@@ -1,5 +1,116 @@
+@import 'node_modules/Mesh/src/mesh.scss';
 @import 'node_modules/chico/src/ui/styles/ui-theme.scss';
 
-.teste { 
-    background: red;
+@import 'variables.scss';
+
+.product__title {
+    font-size: 2.3em;
+    margin: $default-spacing 0;
+}
+
+.product__price {
+    font-size: 2.3em;
+    margin-bottom: $default-spacing;
+    line-height: normal;
+
+    sup {
+        line-height: 1.5em;
+        font-size: .5em;
+    }
+}
+
+.productForm {
+    .productForm__label {
+        width: 70px;
+        display: inline-block;
+    }
+}
+
+.quantityContainer {
+    margin-bottom: $default-spacing / 2;
+}
+
+.paymentsContainer {
+    margin-bottom: $default-spacing;
+}
+
+.ownershipMessage {
+    margin-top: 5px;
+    color: #999;
+}
+
+
+.similarContainer {
+    margin-top: $default-spacing;
+}
+
+
+
+.questionContainer {
+    border-bottom: 1px solid #CCC;
+}
+
+
+.tabs input[type=radio] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.tabs {
+    float: none;
+    list-style: none;
+    position: relative;
+    padding: 0;
+    margin: $default-spacing auto;
+}
+
+.tabs li{
+    float: left;
+}
+
+.tabs label {
+    display: block;
+    padding: 10px 20px;
+    border-radius: 4px 4px 0 0;
+    font-size: 1.2em;
+    font-weight: normal;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.tabs label:hover {
+    background: rgba(255,255,255,0.5);
+    top: 0;
+}
+
+[id^=tab]:checked + label {
+    background: #CCC;
+    color: #000;
+    top: 0;
+}
+
+[id^=tab]:checked ~ [id^=tab-content] {
+    display: block;
+}
+
+.tab-content{
+    z-index: 2;
+    display: none;
+    text-align: left;
+    width: 100%;
+    border: 1px solid #CCC;
+    padding: 15px;
+    position: absolute;
+    margin-bottom: $default-spacing;
+    left: 0;
+    box-sizing: border-box;
+    -webkit-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
 }
